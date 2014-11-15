@@ -25,11 +25,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class ArtWorkListActivity extends Activity {
+public class ArtWorkListActivity extends Activity implements Display {
     private static final String PACKAGE = "com.israelferrer.alexandria";
     private static final String KEY_FAVS = PACKAGE + ".FAVS";
     private List<ArtWork> artWorkList;
     private ArtWorkAdapter adapter;
+    private ListView listView;
 
 
     @Override
@@ -37,8 +38,8 @@ public class ArtWorkListActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        ListView listView = (ListView) findViewById(R.id.listView);
-        Presenter presenter = new ArtWorkListPresenter();
+        listView = (ListView) findViewById(R.id.listView);
+        Presenter presenter = new ArtWorkListPresenter(this);
         presenter.onCreate();
     }
 
@@ -62,6 +63,12 @@ public class ArtWorkListActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setAdapter(List<ArtWork> artWorks) {
+        adapter = new ArtWorkAdapter();
+        listView.setAdapter(adapter);
     }
 
     private class ArtWorkAdapter extends BaseAdapter {

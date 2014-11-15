@@ -13,20 +13,24 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class ArtWorkListPresenter implements Presenter {
+    private final Display display;
+
+    public ArtWorkListPresenter(Display display) {
+        this.display = display;
+    }
 
     @Override
     public void onCreate() {
         InputStream stream = getResources().openRawResource(R.raw.artwork);
         Type listType = new TypeToken<List<ArtWork>>() {
         }.getType();
-        artWorkList = new Gson().fromJson(new InputStreamReader(stream), listType);
+        List<ArtWork> artWorkList = new Gson().fromJson(new InputStreamReader(stream), listType);
         final SharedPreferences preferences = getSharedPreferences(getPackageName()
                 , Context.MODE_PRIVATE);
         for (ArtWork artWork : artWorkList) {
             artWork.setRating(preferences.getFloat(PACKAGE + artWork.getId(), 0F));
         }
+        display.setAdapter(artWorkList);
 
-        adapter = new ArtWorkAdapter();
-        listView.setAdapter(adapter);
     }
 }
