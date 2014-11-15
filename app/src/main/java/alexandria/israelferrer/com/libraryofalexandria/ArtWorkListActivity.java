@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class MainActivity extends Activity {
+public class ArtWorkListActivity extends Activity {
     private static final String PACKAGE = "com.israelferrer.alexandria";
     private static final String KEY_FAVS = PACKAGE + ".FAVS";
     private List<ArtWork> artWorkList;
@@ -130,7 +130,7 @@ public class MainActivity extends Activity {
                     ImageView image = (ImageView) row.findViewById(R.id.painting);
                     TextView painter = (TextView) row.findViewById(R.id.author);
                     painter.setText(artWork.getTitle() + " by " + artWork.getAuthor());
-                    Picasso.with(MainActivity.this).load(artWork.getContentUrl()).fit()
+                    Picasso.with(ArtWorkListActivity.this).load(artWork.getContentUrl()).fit()
                             .into(image);
                     RatingBar rating = (RatingBar) row.findViewById(R.id.rate);
                     rating.setRating(artWork.getRating());
@@ -164,7 +164,7 @@ public class MainActivity extends Activity {
                     break;
                 case ArtWork.MOVIE:
                 case ArtWork.OPERA:
-                    row = new ViewStub(MainActivity.this);
+                    row = new ViewStub(ArtWorkListActivity.this);
                     break;
 
                 default:
