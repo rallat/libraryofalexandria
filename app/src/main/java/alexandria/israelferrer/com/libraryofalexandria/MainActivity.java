@@ -36,24 +36,14 @@ public class MainActivity extends Activity {
     private List<ArtWork> artWorkList;
     private ArtWorkAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
         ListView listView = (ListView) findViewById(R.id.listView);
-        InputStream stream = getResources().openRawResource(R.raw.artwork);
-        Type listType = new TypeToken<List<ArtWork>>() {
-        }.getType();
-        artWorkList = new Gson().fromJson(new InputStreamReader(stream), listType);
-        final SharedPreferences preferences = getSharedPreferences(getPackageName()
-                , Context.MODE_PRIVATE);
-        for (ArtWork artWork : artWorkList) {
-            artWork.setRating(preferences.getFloat(PACKAGE + artWork.getId(), 0F));
-        }
-
-        adapter = new ArtWorkAdapter();
-        listView.setAdapter(adapter);
+        
 
     }
 
