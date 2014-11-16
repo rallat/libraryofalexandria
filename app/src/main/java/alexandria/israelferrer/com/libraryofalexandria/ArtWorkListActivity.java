@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -26,8 +27,7 @@ import java.util.List;
 
 
 public class ArtWorkListActivity extends Activity implements Display {
-    private static final String PACKAGE = "com.israelferrer.alexandria";
-    private static final String KEY_FAVS = PACKAGE + ".FAVS";
+    private static final String KEY_FAVS = "com.israelferrer.alexandria.FAVS";
     private List<ArtWork> artWorkList;
     private ArtWorkAdapter adapter;
     private ListView listView;
@@ -39,7 +39,11 @@ public class ArtWorkListActivity extends Activity implements Display {
 
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.listView);
-        Presenter presenter = new ArtWorkListPresenter(this, new ArtWorkModel());
+        artWorkList=new ArrayList<ArtWork>();
+        Presenter presenter = new ArtWorkListPresenter(this,
+                new ArtWorkModel(new ArtWorkServiceImpl(getResources().openRawResource(R.raw
+                        .artwork)), getSharedPreferences(getPackageName()
+                , Context.MODE_PRIVATE)));
         presenter.onCreate();
     }
 
@@ -66,7 +70,9 @@ public class ArtWorkListActivity extends Activity implements Display {
     }
 
     @Override
-    public void setAdapter(List<ArtWork> artWorks) {
+    public void setAdapter(List<ArtWork> artWorks)
+    {
+        artWorkList.addAll(artWorks);
         adapter = new ArtWorkAdapter();
         listView.setAdapter(adapter);
     }
@@ -145,7 +151,8 @@ public class ArtWorkListActivity extends Activity implements Display {
                         @Override
                         public void onRatingChanged(RatingBar ratingBar, float rating,
                                                     boolean fromUser) {
-                            preferences.edit().putFloat(PACKAGE + artWork.getId(), rating).apply();
+                            preferences.edit().putFloat(ArtWorkModel.PACKAGE + artWork.getId(),
+                                    rating).apply();
                             artWork.setRating(rating);
                         }
                     });

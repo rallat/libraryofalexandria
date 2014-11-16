@@ -1,8 +1,7 @@
 package alexandria.israelferrer.com.libraryofalexandria;
 
-
 import java.util.List;
 
-public interface Model {
+public interface ArtWorkService {
     void getArtWorks(Callback<List<ArtWork>> result);
 }

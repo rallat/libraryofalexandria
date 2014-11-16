@@ -1,6 +1,8 @@
 package alexandria.israelferrer.com.libraryofalexandria;
 
 
+import java.util.List;
+
 public class ArtWorkListPresenter implements Presenter {
     private final Display display;
     private final Model model;
@@ -12,6 +14,16 @@ public class ArtWorkListPresenter implements Presenter {
 
     @Override
     public void onCreate() {
-        display.setAdapter(model.getArtWorks());
+        model.getArtWorks(new Callback<List<ArtWork>>() {
+            @Override
+            public void success(List<ArtWork> result) {
+                display.setAdapter(result);
+            }
+
+            @Override
+            public void failure(Exception exception) {
+
+            }
+        });
     }
 }
