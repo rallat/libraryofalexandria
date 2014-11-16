@@ -10,6 +10,8 @@ public class ArtWork implements Comparable<ArtWork> {
     public static final int MOVIE = 4;
 
     private final int type;
+    private final String id;
+
     private String text;
     private String author;
     private String title;
@@ -19,11 +21,11 @@ public class ArtWork implements Comparable<ArtWork> {
     private List<String> actors;
     private List<String> singers;
     private boolean isEditorSelected;
-    private String id;
     private float rating;
 
-    public ArtWork(int type) {
+    public ArtWork(int type, String id) {
         this.type = type;
+        this.id = id;
     }
 
     public int getType() {
@@ -106,10 +108,6 @@ public class ArtWork implements Comparable<ArtWork> {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     @Override
     public int compareTo(ArtWork another) {
         final int BEFORE = -1;
@@ -125,7 +123,8 @@ public class ArtWork implements Comparable<ArtWork> {
     public void setRating(float rating) {
         this.rating = rating;
     }
-    public float getRating(){
+
+    public float getRating() {
         return this.rating;
     }
 }
