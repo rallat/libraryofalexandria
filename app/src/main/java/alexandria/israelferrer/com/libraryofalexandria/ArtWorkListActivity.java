@@ -39,7 +39,7 @@ public class ArtWorkListActivity extends Activity implements Display {
 
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.listView);
-        Presenter presenter = new ArtWorkListPresenter(this);
+        Presenter presenter = new ArtWorkListPresenter(this, new ArtWorkModel());
         presenter.onCreate();
     }
 
