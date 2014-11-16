@@ -28,10 +28,10 @@ import java.util.List;
 
 public class ArtWorkListActivity extends Activity implements Display {
     private static final String KEY_FAVS = "com.israelferrer.alexandria.FAVS";
-    private List<ArtWork> artWorkList;
-    private ArtWorkAdapter adapter;
-    private ListView listView;
-
+    private Presenter presenter;
+    List<ArtWork> artWorkList;
+    ArtWorkAdapter adapter;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,13 @@ public class ArtWorkListActivity extends Activity implements Display {
 
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.listView);
-        artWorkList=new ArrayList<ArtWork>();
-        Presenter presenter = new ArtWorkListPresenter(this,
-                new ArtWorkModel(new ArtWorkServiceImpl(getResources().openRawResource(R.raw
-                        .artwork)), getSharedPreferences(getPackageName()
-                , Context.MODE_PRIVATE)));
+        artWorkList = new ArrayList<ArtWork>();
+        if (presenter == null) {
+            presenter = new ArtWorkListPresenter(this,
+                    new ArtWorkModel(new ArtWorkServiceImpl(getResources().openRawResource(R.raw
+                            .artwork)), getSharedPreferences(getPackageName()
+                            , Context.MODE_PRIVATE)));
+        }
         presenter.onCreate();
     }
 
@@ -66,15 +68,19 @@ public class ArtWorkListActivity extends Activity implements Display {
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void setAdapter(List<ArtWork> artWorks)
-    {
-        artWorkList.addAll(artWorks);
+    public void setAdapter(List<ArtWork> artWorks) {
+        artWorkList = artWorks;
         adapter = new ArtWorkAdapter();
         listView.setAdapter(adapter);
+    }
+
+    public void setPresenter(Presenter presenter) {
+        this.presenter = presenter;
     }
 
     private class ArtWorkAdapter extends BaseAdapter {

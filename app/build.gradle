@@ -7,7 +7,7 @@ repositories {
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.0.1"
+    buildToolsVersion "21.1.1"
 
     defaultConfig {
         applicationId "alexandria.israelferrer.com.libraryofalexandria"
@@ -28,4 +28,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.squareup.picasso:picasso:2.4.0'
+
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.1'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.1'
+
+    androidTestCompile 'org.mockito:mockito-core:1.9.5'
 }
