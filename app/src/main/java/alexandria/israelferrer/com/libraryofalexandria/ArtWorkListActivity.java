@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -28,10 +29,10 @@ import java.util.List;
 
 public class ArtWorkListActivity extends Activity implements Display {
     private static final String KEY_FAVS = "com.israelferrer.alexandria.FAVS";
-    private Presenter presenter;
     List<ArtWork> artWorkList;
     ArtWorkAdapter adapter;
     ListView listView;
+    private Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +80,19 @@ public class ArtWorkListActivity extends Activity implements Display {
         listView.setAdapter(adapter);
     }
 
+    @Override
+    public void showError() {
+        Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
+    }
+
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
     }
 
     private class ArtWorkAdapter extends BaseAdapter {
 
-        private boolean isOrder;
         private final List<ArtWork> orderedList;
+        private boolean isOrder;
 
         public ArtWorkAdapter() {
             super();

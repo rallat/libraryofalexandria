@@ -22,7 +22,7 @@ public class ArtWorkListPresenter implements Presenter {
 
             @Override
             public void failure(Exception exception) {
-
+                display.showError();
             }
         });
     }

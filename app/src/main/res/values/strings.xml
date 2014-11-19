@@ -6,5 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="default_quote">I\'ll start with small things.</string>
     <string name="default_artist">Vincent van Gogh</string>
+    <string name="error">Error loading ArtWorks</string>
 
 </resources>

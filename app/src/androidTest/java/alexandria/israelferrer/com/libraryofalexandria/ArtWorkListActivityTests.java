@@ -14,8 +14,8 @@ import static org.mockito.Mockito.verify;
 
 
 public class ArtWorkListActivityTests extends ActivityUnitTestCase<ArtWorkListActivity> {
-    private static final String ANY_ID = "15224484";
-    private static final List<ArtWork> ARTWORKS = new ArrayList<ArtWork>() {
+    static final String ANY_ID = "15224484";
+    static final List<ArtWork> ARTWORKS = new ArrayList<ArtWork>() {
         {
             add(new ArtWork(ArtWork.QUOTE, ANY_ID));
         }
